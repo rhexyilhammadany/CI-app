@@ -29,13 +29,16 @@
               </tr>
             </thead>
             <tbody>
+              <?php $i = 1 ; ?>
+              <?php foreach($mahasiswa as $mhs): ?>
               <tr>
-                <th scope="row">1</th>
-                <td><?= $mahasiswa ['nama']; ?></td>
-                <td><?= $mahasiswa ['nrp']; ?></td>
-                <td><?= $mahasiswa ['email']; ?></td>
-                <td><?= $mahasiswa ['jurusan']; ?></td>
+                <th scope="row"><?= $i++; ?></th>
+                <td><?= $mhs ['nama']; ?></td>
+                <td><?= $mhs ['nrp']; ?></td>
+                <td><?= $mhs ['email']; ?></td>
+                <td><?= $mhs ['jurusan']; ?></td>
               </tr>
+            <?php endforeach; ?>
             </tbody>
           </table>
 
