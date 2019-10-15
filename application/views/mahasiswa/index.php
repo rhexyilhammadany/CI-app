@@ -31,10 +31,10 @@
             <tbody>
               <tr>
                 <th scope="row">1</th>
-                <td>Rhexy</td>
-                <td>173040125</td>
-                <td>rhexyilham28@gmail.com</td>
-                <td>Teknik Informatika</td>
+                <td><?= $mahasiswa ['nama']; ?></td>
+                <td><?= $mahasiswa ['nrp']; ?></td>
+                <td><?= $mahasiswa ['email']; ?></td>
+                <td><?= $mahasiswa ['jurusan']; ?></td>
               </tr>
             </tbody>
           </table>
