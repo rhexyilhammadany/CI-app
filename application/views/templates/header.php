@@ -25,6 +25,7 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="<?= base_url('home/index'); ?>">Home</a>
                     <a class="nav-item nav-link active" href="<?= base_url('mahasiswa/index'); ?>">Mahasiswa</a>
+                     <a class="nav-item nav-link active" href="<?= base_url('peoples/index'); ?>">Peoples</a>
                     <a class="nav-item nav-link" href="<?= base_url('about/index'); ?>">About</a>
                 </div>
             </div>
