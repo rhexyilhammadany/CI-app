@@ -38,13 +38,16 @@
                 Data tidak Ditemukan.
             </div>
             <?php endif; ?>
-            <ul class="list-group">
+           <ul class="list-group">
                 <?php foreach ($mahasiswa as $mhs) : ?>
                 <li class="list-group-item">
                     <?= $mhs['nama']; ?>
-                    <a href="<?= base_url(); ?>mahasiswa/hapus/<?= $mhs['id'] ?>" class="badge badge-danger float-right ml-2" onclick="return confirm('yakin?')">hapus</a>
-                    <a href="<?= base_url(); ?>mahasiswa/ubah/<?= $mhs['id'] ?>" class="badge badge-success float-right ml-2 tampilModalUbah" data-toggle="modal" data-target="#formModal" data-id="<?= $mhs['id'] ?>">ubah</a>
-                    <a href="<?= base_url(); ?>mahasiswa/detail/<?= $mhs['id'] ?>" class="badge badge-primary float-right">detail</a>
+                    <a href="<?= base_url(); ?>mahasiswa/hapus/<?= $mhs['id']; ?>"
+                        class="badge badge-danger float-right tombol-hapus">hapus</a>
+                    <a href="<?= base_url(); ?>mahasiswa/ubah/<?= $mhs['id']; ?>"
+                        class="badge badge-success float-right">ubah</a>
+                    <a href="<?= base_url(); ?>mahasiswa/detail/<?= $mhs['id']; ?>"
+                        class="badge badge-primary float-right">detail</a>
                 </li>
                 <?php endforeach; ?>
             </ul>
