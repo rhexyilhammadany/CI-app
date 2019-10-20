@@ -22,8 +22,9 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
 	public function coba()
 	{
-		echo base_url();
+		echo 'welcome/coba';
 	}
 }

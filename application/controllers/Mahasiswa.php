@@ -2,26 +2,78 @@
 
 class Mahasiswa extends CI_Controller
 {
-	public function index()
-	{
-		// $data['mahasiswa'] = [
-		// 	[
-		// 	'nama' => 'Rhexy ilham',
-		// 	'nrp'  => '173040125',
-		// 	'email'=> 'rhexy28@gmail.com',
-		// 	'jurusan' => 'Teknik informatika'
-		//     ],
-		//     [
-		// 	'nama' => 'Lucas',
-		// 	'nrp'  => '173040124',
-		// 	'email'=> 'lucas@gmail.com',
-		// 	'jurusan' => 'Teknik Pangan'
-		//     ]
-		// ];
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Mahasiswa_model');
+        $this->load->library('form_validation');
+    }
+    public function index()
+    {
+        $data['judul'] = "Halaman Mahasiswa";
+        $data['mahasiswa'] = $this->Mahasiswa_model->getAllMahasiswa();
+        if ($this->input->post('keyword')) {
+            $data['mahasiswa'] = $this->Mahasiswa_model->cariDataMahasiswa();
+        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('mahasiswa/index', $data);
+        $this->load->view('templates/footer');
+    }
 
-       
-		$data ['mahasiswa'] = $this->db->get('mahasiswa')
-		->result_array();
-		$this->load->view('mahasiswa/index',$data);
-	}
+    public function tambah()
+    {
+        $data['judul'] = "Form Tambah Data Mahasiswa";
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nrp', 'NRP', 'required|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('jurusan', 'Jurusan', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('mahasiswa/tambah');
+            $this->load->view('templates/footer');
+        } else {
+            $this->Mahasiswa_model->tambahDataMahasiswa();
+            $this->session->set_flashdata('flash', 'ditambahkan');
+            redirect('mahasiswa');
+        }
+    }
+
+    public function hapus($id)
+    {
+        $this->Mahasiswa_model->hapusDataMahasiswa($id);
+        $this->session->set_flashdata('flash', 'dihapus');
+        redirect('mahasiswa');
+    }
+
+    public function detail($id)
+    {
+        $data['judul'] = "Detail Mahasiswa";
+        $data['mhs'] = $this->Mahasiswa_model->getMahasiswaById($id);
+        $this->load->view('templates/header', $data);
+        $this->load->view('mahasiswa/detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function ubah($id)
+    {
+        $data['judul'] = "Form Ubah Data Mahasiswa";
+        $data['mhs'] = $this->Mahasiswa_model->getMahasiswaById($id);
+        $data['jurusan'] = ['Teknik Informatika', 'Teknik Mesin', 'Teknik Industri', 'Teknik Pangan', 'Teknik Planologi', 'Teknik Lingkungan'];
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nrp', 'NRP', 'required|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('jurusan', 'Jurusan', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('mahasiswa/ubah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Mahasiswa_model->ubahDataMahasiswa($id);
+            $this->session->set_flashdata('flash', 'diubah');
+            redirect('mahasiswa');
+        }
+    }
 }
